@@ -2,5 +2,27 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: rgb(20, 20, 20);
   color: rgb(255, 255, 255);
-  font-family: Schibsted Grotesk, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: rgba(153, 153, 153, 0.9);
+  transition: .1s;
+}
+
+a:visited {
+  color: rgba(136, 136, 136, 0.9);
+}
+
+a:hover {
+  color: rgba(153, 153, 153, 1)
+}
+
+a:visited:hover {
+  color: rgba(136, 136, 136, 1);
 }

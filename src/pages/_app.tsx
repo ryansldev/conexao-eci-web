@@ -1,12 +1,21 @@
 import '@/styles/globals.css'
 import {Provider as StyletronProvider} from 'styletron-react';
-import { DarkTheme, BaseProvider } from 'baseui';
+import { DarkTheme, BaseProvider, styled } from 'baseui';
 import type { AppProps } from 'next/app'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useEffect, useState } from 'react';
 
 const queryClient = new QueryClient()
+
+const Centered = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%',
+  minHeight: '98vh',
+  width: '100%',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const [engine, setEngine] = useState<any>(null);
@@ -28,7 +37,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <StyletronProvider value={engine}>
         <BaseProvider theme={DarkTheme}>
-          <Component {...pageProps} />
+          <Centered>
+            <Component {...pageProps} />
+          </Centered>
         </BaseProvider>
       </StyletronProvider>
     </QueryClientProvider>

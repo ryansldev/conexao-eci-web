@@ -7,6 +7,11 @@ import Link from "next/link"
 import { requestGetTeachers } from "@/api/getTeachers"
 import { AxiosError } from "axios"
 
+import {
+  DisplayMedium,
+  HeadingSmall,
+  ParagraphLarge,
+} from 'baseui/typography';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Button, KIND } from "baseui/button"
 import { Avatar } from "baseui/avatar"
@@ -51,8 +56,8 @@ export default function Teachers() {
         maxWidth="30vw"
       >
         <FlexGrid>
-          <FlexGridItem><span>Areial, PB</span></FlexGridItem>
-          <FlexGridItem><h1 style={{ marginTop: 0 }}>Conexão ECI</h1></FlexGridItem>
+          <FlexGridItem><HeadingSmall>Areial, PB</HeadingSmall></FlexGridItem>
+          <FlexGridItem><DisplayMedium style={{ marginTop: 0 }}>Conexão ECI</DisplayMedium></FlexGridItem>
           <FlexGridItem>
             <FlexGrid
               gridGap={"0.5em"}
@@ -60,7 +65,7 @@ export default function Teachers() {
               {teachers && teachers.map((teacher) => (
                 <Avatar
                   name={teacher.name}
-                  size="scale1600"
+                  size={"scale1400"}
                   src={teacher.profile_pic}
                   key={teacher.id}
                 />
@@ -70,14 +75,14 @@ export default function Teachers() {
           <FlexGridItem
             style={{ marginTop: "1em"}}
           >
-            <span>
+            <ParagraphLarge>
               {teachers.length} professores
-            </span>
+            </ParagraphLarge>
           </FlexGridItem>
           <FlexGridItem>
-            <span>
+            <ParagraphLarge>
               +100 alunos
-            </span>
+            </ParagraphLarge>
           </FlexGridItem>
           <FlexGridItem>
             <Link
