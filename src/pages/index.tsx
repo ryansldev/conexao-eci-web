@@ -1,10 +1,15 @@
-import { requestGetTeachers } from "@/api/getTeachers"
-import { AxiosError } from "axios"
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
 import { useQuery } from "react-query"
+
+import Head from "next/head"
+import Link from "next/link"
+
+import { requestGetTeachers } from "@/api/getTeachers"
+import { AxiosError } from "axios"
+
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { Button, KIND } from "baseui/button"
+import { Avatar } from "baseui/avatar"
 
 export default function Teachers() {
   const [isLoading, setIsLoading] = useState(false)
@@ -33,36 +38,63 @@ export default function Teachers() {
   )
 
   return (
-    <main className="flex h-screen items-center justify-center gap-32">
+    <FlexGrid
+      justifyContent="center"
+      alignItems="center"
+      minHeight={"98vh"}
+    >
       <Head>
         <title>Conexão ECI</title>
       </Head>
-      <div>
-        <span className="text-[#bbb] leading-relaxed">Areial, PB</span>
-        <h1 className="text-4xl font-bold mb-8">Conexão ECI</h1>
-        <div className="flex gap-4 max-w-[500px] flex-wrap">
-          {teachers && teachers.map((teacher) => (
-            <div key={teacher.id} className="h-[80px] w-[80px] relative">
-              <Image src={teacher.profile_pic} alt={teacher.name} fill className="rounded-full" />
-            </div>
-          ))}
-          <span className="mt-4 text-[#bbb]">
-            {teachers.length} professores <br />
-            +100 alunos<br/>
-          </span>
-        </div>
-        <Link
-          passHref
-          href="/sign-in"
-        >
-          <button
-            type="button"
-            className="py-2 px-4 rounded bg-[#333] mt-4 font-bold text-[#bbb]"
+      
+      <FlexGridItem
+        maxWidth="30vw"
+      >
+        <FlexGrid>
+          <FlexGridItem><span>Areial, PB</span></FlexGridItem>
+          <FlexGridItem><h1 style={{ marginTop: 0 }}>Conexão ECI</h1></FlexGridItem>
+          <FlexGridItem>
+            <FlexGrid
+              gridGap={"0.5em"}
+            >
+              {teachers && teachers.map((teacher) => (
+                <Avatar
+                  name={teacher.name}
+                  size="scale1600"
+                  src={teacher.profile_pic}
+                  key={teacher.id}
+                />
+              ))}
+            </FlexGrid>
+          </FlexGridItem>
+          <FlexGridItem
+            style={{ marginTop: "1em"}}
           >
-            Entrar
-          </button>
-        </Link>
-      </div>
-    </main>
+            <span>
+              {teachers.length} professores
+            </span>
+          </FlexGridItem>
+          <FlexGridItem>
+            <span>
+              +100 alunos
+            </span>
+          </FlexGridItem>
+          <FlexGridItem>
+            <Link
+              passHref
+              href="/sign-in"
+            >
+              <Button
+                type="button"
+                kind={KIND.secondary}
+                style={{ marginTop: "2em" }}
+              >
+                Cadastrar-se
+              </Button>
+            </Link>
+          </FlexGridItem>
+        </FlexGrid>
+      </FlexGridItem>
+    </FlexGrid>
   )
 }
