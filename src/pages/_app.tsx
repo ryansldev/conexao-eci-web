@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useEffect, useState } from 'react';
+import { ToasterContainer } from 'baseui/toast';
 
 const queryClient = new QueryClient()
 
@@ -37,9 +38,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <StyletronProvider value={engine}>
         <BaseProvider theme={DarkTheme}>
-          <Centered>
-            <Component {...pageProps} />
-          </Centered>
+          <ToasterContainer>
+            <Centered>
+              <Component {...pageProps} />
+            </Centered>
+          </ToasterContainer>
         </BaseProvider>
       </StyletronProvider>
     </QueryClientProvider>
