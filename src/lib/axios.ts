@@ -1,3 +1,4 @@
+import { localStorageKeys } from "@/config/localStorageKeys";
 import axios, { AxiosError } from "axios";
 
 export interface IApiException {
@@ -12,6 +13,16 @@ export interface IApiErrorDTO {
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
 });
 
 export const apiException = (error: Error): IApiException => {

@@ -1,21 +1,22 @@
-import '@/styles/globals.css'
-import {Provider as StyletronProvider} from 'styletron-react';
-import { DarkTheme, BaseProvider, styled } from 'baseui';
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import { Provider as StyletronProvider } from "styletron-react";
+import { DarkTheme, BaseProvider, styled } from "baseui";
+import type { AppProps } from "next/app";
 
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { useEffect, useState } from 'react';
-import { ToasterContainer } from 'baseui/toast';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { useEffect, useState } from "react";
+import { ToasterContainer } from "baseui/toast";
+import { AuthProvider } from "@/contexts/AuthContext";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
-const Centered = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100%',
-  minHeight: '98vh',
-  width: '100%',
+const Centered = styled("div", {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
+  minHeight: "98vh",
+  width: "100%",
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -26,25 +27,27 @@ export default function App({ Component, pageProps }: AppProps) {
     // Reason: It requires use of `document`, which is not available
     // outside the browser, so we need to wait until it successfully loads.
     // Source: https://www.gatsbyjs.org/docs/debugging-html-builds/
-    import('styletron-engine-atomic').then(styletron => {
+    import("styletron-engine-atomic").then((styletron) => {
       const clientEngine = new styletron.Client();
       setEngine(clientEngine);
     });
   }, []);
 
   if (!engine) return null;
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <StyletronProvider value={engine}>
         <BaseProvider theme={DarkTheme}>
           <ToasterContainer>
-            <Centered>
-              <Component {...pageProps} />
-            </Centered>
+            <AuthProvider>
+              <Centered>
+                <Component {...pageProps} />
+              </Centered>
+            </AuthProvider>
           </ToasterContainer>
         </BaseProvider>
       </StyletronProvider>
     </QueryClientProvider>
-  )
+  );
 }

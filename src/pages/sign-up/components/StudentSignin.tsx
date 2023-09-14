@@ -36,9 +36,9 @@ export function StudentSignin() {
   const { control, handleSubmit } = useForm();
   const router = useRouter();
 
-  function onSubmitData({ name, login, email, room }: FieldValues) {
+  function onSubmitData({ name, login, email, room, password }: FieldValues) {
     console.log("AQUI");
-    setStudentData({ ...studentData, name, login, email, room });
+    setStudentData({ ...studentData, name, login, email, room, password });
     setStep(step + 1);
   }
 
@@ -145,6 +145,7 @@ export function StudentSignin() {
                 <Input
                   {...field}
                   id="password"
+                  required
                   placeholder="Sua senha"
                   type="password"
                 />

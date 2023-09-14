@@ -6,13 +6,13 @@ import { Tabs, Tab, FILL } from "baseui/tabs-motion";
 import { TeacherSignin } from "./components/TeacherSignin";
 import { StudentSignin } from "./components/StudentSignin";
 
-export default function SignIn() {
+export default function SignUp() {
   const [activeKey, setActiveKey] = useState<Key>(0);
 
   return (
     <main style={{ width: "100%", maxWidth: "80vw" }}>
       <Head>
-        <title>Conexão ECI | Sign In</title>
+        <title>Conexão ECI | Sign Up</title>
       </Head>
 
       <div>

@@ -11,8 +11,11 @@ import { DisplayMedium, HeadingSmall, ParagraphLarge } from "baseui/typography";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Button, KIND } from "baseui/button";
 import { Avatar } from "baseui/avatar";
+import { useAuth } from "@/hook/useAuth";
 
 export default function Teachers() {
+  const { signedIn, signout } = useAuth();
+
   const [isLoading, setIsLoading] = useState(false);
   const [teachers, setTeachers] = useState<
     {
@@ -74,15 +77,37 @@ export default function Teachers() {
             <ParagraphLarge>+100 alunos</ParagraphLarge>
           </FlexGridItem>
           <FlexGridItem>
-            <Link passHref href="/sign-up">
+            {!signedIn ? (
+              <FlexGrid gridGap={"16px"}>
+                <Link passHref href="/sign-up">
+                  <Button
+                    type="button"
+                    kind={KIND.secondary}
+                    style={{ marginTop: "2em" }}
+                  >
+                    Cadastrar-se
+                  </Button>
+                </Link>
+                <Link passHref href="/sign-in">
+                  <Button
+                    type="button"
+                    kind={KIND.primary}
+                    style={{ marginTop: "2em" }}
+                  >
+                    Entrar
+                  </Button>
+                </Link>
+              </FlexGrid>
+            ) : (
               <Button
                 type="button"
-                kind={KIND.secondary}
+                kind={KIND.primary}
+                onClick={signout}
                 style={{ marginTop: "2em" }}
               >
-                Cadastrar-se
+                Sair
               </Button>
-            </Link>
+            )}
           </FlexGridItem>
         </FlexGrid>
       </FlexGridItem>
