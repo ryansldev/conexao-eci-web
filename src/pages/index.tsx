@@ -74,7 +74,7 @@ export default function Teachers() {
             <ParagraphLarge>+100 alunos</ParagraphLarge>
           </FlexGridItem>
           <FlexGridItem>
-            <Link passHref href="/sign-in">
+            <Link passHref href="/sign-up">
               <Button
                 type="button"
                 kind={KIND.secondary}
