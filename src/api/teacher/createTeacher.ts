@@ -6,5 +6,5 @@ interface ICreateTeacherBody {
 }
 
 export async function requestCreateTeacher(data: ICreateTeacherBody) {
-  return await api.post('/teachers', data)
+  return await api.post("/teachers", data);
 }
